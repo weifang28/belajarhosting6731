@@ -6,7 +6,7 @@ app.use(express.urlencoded({extended:true}));
 app.set('view engine','ejs');
 
 //utk heroku
-const port=process.new.PORT;
+const port=process.env.PORT || 3000;
 
 app.listen(port, function(){
     console.log(`${port} hehehe`);
