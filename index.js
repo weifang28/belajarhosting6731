@@ -12,6 +12,11 @@ mahasiswa = [{
 }
 ];
 
+app.get("/", function(req,res){
+    return res.status(200).send("Hello World");
+});
+
+
 app.get("/mahasiswa", function(req,res){
     return res.status(200).send(mahasiswa);
 });
@@ -27,7 +32,7 @@ app.post("/mahasiswa/", function(req,res){
         nama: "Budi"
     });
 });
-
-app.listen(3000, function(req,res){
-    console.log("listening on port 3000");
+const port= process.env.PORT || 3000
+app.listen(port, function(req,res){
+    console.log(`listening on port ${port}`);
 });
