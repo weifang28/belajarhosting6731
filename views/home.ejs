@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<style>
+    .contain{
+        margin: auto;
+        /* background-color: navy; */
+        width: 60%;
+        /* height:; */
+        padding: 5px;
+    }
+    .kotak{
+        margin: 5px 5px 5px 5px;
+        width: 45%;
+        height: 300px;
+        float: left;
+        background-color: navy;
+        border: 1px black;
+        padding: 10px;
+        text-align: center;
+    }
+    img{
+        width: 80%;
+        height: 60%;
+    }
+</style>
+<body style="background-color:#ACE7FF; padding: 50px;">
+    <h1><%=nama%></h1>
+    <a href="/login"><button>Logout</button></a>
+    <a href="/favorites"><button>Favorites</button></a>
+    <center><h2>HOME</h2></center>
+    <div class="contain">
+        <% for(var i=0; i<data.teams.length; i++){%>
+            <div class="kotak">
+                <img src=<%=data.teams[i].crestUrl%> alt="" >
+                <h3><%=data.teams[i].name%></h3>
+                <table style="margin:auto">
+                    <tr>
+                        <td>
+                            <form action="/detail" method="post">
+                                <input type="hidden" name="id" value="<%=data.teams[i].id%>">
+                                <input type="submit" value="Detail">
+                            </form>
+                        </td>
+                        <% var flag=0;
+                        for(var j=0; j<favs.length; j++){
+                            if(favs[j].id==data.teams[i].id){
+                                flag=1;
+                            }
+                        }%>
+                        
+                        <% if(flag==0){ %>
+                            <td>
+                                <form action="/addFavorites" method="post">
+                                    <input type="hidden" name="id" value="<%=data.teams[i].id%>">
+                                    <input type="hidden" name="no_telp" value="<%=no_telp%>">
+                                    <input type="submit" value="Add to Favorites">
+                                </form>
+                            </td>
+                        <% }else{%>
+                            <td>
+                                <form action="/delFavorites" method="post">
+                                    <input type="hidden" name="id" value="<%=data.teams[i].id%>">
+                                    <input type="hidden" name="no_telp" value="<%=no_telp%>">
+                                    <input type="submit" value="Delete from Favorites">
+                                </form>
+                            </td>
+                        <%}%>     
+                    </tr>
+                </table>
+            </div>     
+        <%}%>
+    </div>
+</body>
+</html>
