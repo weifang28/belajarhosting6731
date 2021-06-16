@@ -5,9 +5,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.set('view engine','ejs');
 
-app.listen(3000, function(){
-    console.log("3000 hehehe");
+//utk heroku
+const port=process.new.PORT;
+
+app.listen(port, function(){
+    console.log(`${port} hehehe`);
 });
+
+//app.listen(3000, function(){
+//    console.log(`3000 hehehe`);
+//});
 
 const users = require("./routes/users");
 app.use("/",users);
